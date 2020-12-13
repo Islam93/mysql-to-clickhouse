@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql
+    restart: on-failure
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    volumes:
+      - ./mysql_init/:/docker-entrypoint-initdb.d
+    ports:
+      - 3307:3306
+
+  clickhouse:
+    container_name: clickhouse
+    image: yandex/clickhouse-server
+    restart: on-failure
+    ports:
+      - 8123:8123
+
+#  app:
+#    container_name: app
+#    build:
+#      context: .
+#    restart: on-failure
+#    depends_on:
+#      - mysql
+#      - clickhouse
+#    links:
+#      - mysql
+#      - clickhouse
