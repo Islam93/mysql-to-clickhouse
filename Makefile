@@ -17,3 +17,11 @@ run-app:
 	    --link clickhouse:clickhouse \
 	    --network mysql-to-clickhouse_default \
 	    mtc
+
+stop-app:
+	- docker stop mtc
+
+rm-app: stop-app
+	- docker rm mtc
+
+rm: rm-dbs rm-app
